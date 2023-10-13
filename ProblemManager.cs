@@ -52,7 +52,7 @@ internal class ProblemManager
         }
 
         Console.WriteLine("Problems discovered:");
-        foreach (var chunk in _problemHandlers.Keys.Chunk(5))
+        foreach (var chunk in _problemHandlers.Values.Select(x => $"[{x.ProblemId}] {x.ProblemName}").Chunk(5))
         {
             Console.WriteLine($"\u001b[1;96m{string.Join('\t', chunk)}\u001b[0m");
         }
