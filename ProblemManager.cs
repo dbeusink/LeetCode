@@ -5,9 +5,9 @@ internal class ProblemManager
 {
     private readonly Dictionary<int, ProblemHandler> _problemHandlers = new();
 
-    public ProblemManager()
+    public ProblemManager(bool includeNonLeetCode = false)
     {
-        RegisterProblems();
+        RegisterProblems(includeNonLeetCode);
     }
 
     public void SolveAllProblems()
@@ -39,15 +39,16 @@ internal class ProblemManager
         }
     }
 
-    private void RegisterProblems()
+    private void RegisterProblems(bool includeNonLeetCode)
     {
         // Auto-discover puzzles using reflection
         Assembly assembly = Assembly.GetExecutingAssembly();
         foreach(var problemType in assembly.GetTypes().Where(x => Attribute.IsDefined(x, typeof(Problem))))
         {
-            if (Attribute.GetCustomAttribute(problemType, typeof(Problem)) is Problem p)
+            if (Attribute.GetCustomAttribute(problemType, typeof(Problem)) is Problem p &&
+                (includeNonLeetCode || p.IsLeetCodeProblem))
             {
-                _problemHandlers.Add(p.ProblemId, new ProblemHandler(p.ProblemId, p.Name, problemType));
+                _problemHandlers.Add(p.ProblemId, new ProblemHandler(p.ProblemId, p.Name, p.IsLeetCodeProblem, problemType));
             }
         }
 

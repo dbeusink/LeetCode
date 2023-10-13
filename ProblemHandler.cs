@@ -4,11 +4,12 @@ internal class ProblemHandler
 
     public int ProblemId { get; }
     public string ProblemName { get; }
+    public bool IsLeetCodeProblem { get; }
     public IProblem Problem => _problem.Value;
 
-    public ProblemHandler(int problemId, string problemName, Type type)
+    public ProblemHandler(int problemId, string problemName, bool isLeetCodeProblem, Type type)
     {
-        (ProblemId, ProblemName) = (problemId, problemName);
+        (ProblemId, ProblemName, IsLeetCodeProblem) = (problemId, problemName, isLeetCodeProblem);
         _problem = new Lazy<IProblem>(() => GetProblemInstance(type), true);
     }
 

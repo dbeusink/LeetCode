@@ -1,3 +1,3 @@
 ﻿
-ProblemManager manager = new ProblemManager();
+ProblemManager manager = new(false);
 manager.SolveAllProblems();
