@@ -1,4 +1,3 @@
-using Xunit;
 
 [Problem(2,"Add Two Numbers", "https://leetcode.com/problems/add-two-numbers/")]
 public class P2_AddTwoNumbers : ProblemBase

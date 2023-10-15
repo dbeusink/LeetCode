@@ -22,11 +22,11 @@ internal class ProblemManager
     {
         if (_problemHandlers.TryGetValue(problemId, out var problemHandler))
         {
-            Console.WriteLine($"Problem \u001b[1;92m'{problemId}. {problemHandler.ProblemName}'\u001b[0m: Solving problem...");
+            Console.WriteLine($"Solving problem \u001b[1;92m'{problemId}. {problemHandler.ProblemName}'\u001b[0m");
             try
             {
                 problemHandler.Problem.Solve();
-                Console.WriteLine($"Problem \u001b[1;92m'{problemId}. {problemHandler.ProblemName}'\u001b[0m: Ended.");
+                Console.WriteLine($"Finished solving problem \u001b[1;92m'{problemId}. {problemHandler.ProblemName}'\u001b[0m");
             }
             catch(Exception ex)
             {

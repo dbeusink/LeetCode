@@ -1,4 +1,3 @@
-using Xunit;
 
 [Problem("Stars")]
 public class P0_Starts : ProblemBase

@@ -1,3 +1,10 @@
 ﻿
 ProblemManager manager = new(false);
-manager.SolveAllProblems();
+if (args.Length == 1 && int.TryParse(args[0], out int id))
+{
+    manager.SolveProblem(id);
+}
+else
+{
+    manager.SolveAllProblems();
+}

@@ -14,6 +14,7 @@ public abstract class ProblemBase : IProblem
         runner.OnExecutionComplete = OnExecutionComplete;
         runner.OnTestFailed = OnTestFailed;
         runner.OnTestSkipped = OnTestSkipped;
+        runner.OnTestPassed = OnTestPassed;
 
         runner.Start(this.GetType().FullName);
 
@@ -34,12 +35,16 @@ public abstract class ProblemBase : IProblem
         {
             if (info.TestsFailed == 0 && info.TestsSkipped == 0)
             {
-                Console.WriteLine($"\u001b[1;92m[PASS]\u001b[0m Finished: {info.TotalTests} tests in {Math.Round(info.ExecutionTime, 3)}s ({info.TestsFailed} failed, {info.TestsSkipped} skipped)");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"[PASS] Finished: {info.TotalTests} tests in {Math.Round(info.ExecutionTime, 3)}s ({info.TestsFailed} failed, {info.TestsSkipped} skipped)");
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"[FAIL] Finished: {info.TotalTests} tests in {Math.Round(info.ExecutionTime, 3)}s ({info.TestsFailed} failed, {info.TestsSkipped} skipped)");
             }
+            Console.ResetColor();
+
         }
 
         _finished.Set();
@@ -61,6 +66,16 @@ public abstract class ProblemBase : IProblem
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("[SKIP] {0}: {1}", info.TestDisplayName, info.SkipReason);
+            Console.ResetColor();
+        }
+    }
+
+    void OnTestPassed(TestPassedInfo info)
+    {
+        lock (_consoleLock)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"[PASS] {info.TestDisplayName} in {Math.Round(info.ExecutionTime, 3)}s");
             Console.ResetColor();
         }
     }

@@ -1,4 +1,3 @@
-using Xunit;
 
 [Problem(1,"Two Sum", "https://leetcode.com/problems/two-sum/")]
 public class P1_TwoSum : ProblemBase
