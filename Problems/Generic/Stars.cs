@@ -1,4 +1,6 @@
 
+namespace LeetCode;
+
 [Problem("Stars")]
 public class P0_Starts : ProblemBase
 {

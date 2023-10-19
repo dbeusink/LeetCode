@@ -1,6 +1,8 @@
 using System.Reflection;
 using Xunit.Runners;
 
+namespace LeetCode;
+
 public abstract class ProblemBase : IProblem
 {
     private readonly object _consoleLock = new();

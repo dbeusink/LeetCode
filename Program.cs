@@ -1,10 +1,31 @@
 ﻿
-ProblemManager manager = new(false);
-if (args.Length == 1 && int.TryParse(args[0], out int id))
+using LeetCode;
+
+ProblemManager manager = new();
+if (args.Length == 1)
 {
-    manager.SolveProblem(id);
+    switch(args[0])
+    {
+        case "l":
+            manager.SolveAllLeetCodeProblems();
+            break;
+        case "g":
+            manager.SolveAllGenericProblems();
+            break;
+        default:
+            if (int.TryParse(args[0], out int id))
+            {
+                manager.SolveLeetCodeProblem(id);
+            }
+            else
+            {
+                manager.SolveGenericProblem(args[0]);
+            }
+            break;
+    }
 }
 else
 {
-    manager.SolveAllProblems();
+    manager.SolveAllLeetCodeProblems();
+    manager.SolveAllGenericProblems();
 }

@@ -1,3 +1,4 @@
+namespace LeetCode;
 [AttributeUsage(AttributeTargets.Class)]
 public class Problem : Attribute
 {
